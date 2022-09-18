@@ -1,15 +1,10 @@
-const links = Array.from(document.querySelectorAll('.menu__link'));
+const item = Array.from(document.querySelectorAll('.menu__item'));
 
-for (let link of links) {
-    link.onclick = function () {
-        if (link.parentElement.querySelector('.menu_sub').className === 'menu menu_sub') {
-            link.parentElement.querySelector('.menu_sub').className = 'menu menu_sub menu_active';
-        }else {
-            link.parentElement.querySelector('.menu_sub').className = 'menu menu_sub'; 
-            }
-        
-        if (link.closest('.menu_main')) {
-            return false;
+for (let i = 0; i < item.length; i ++) {
+    if (item[i].querySelector('.menu_sub')) {
+        item[i].querySelector('.menu__link').onclick = function() {
+        item[i].querySelector('.menu_sub').classList.toggle('menu_active');
+        return false;
+        } 
         }
     }
-}
