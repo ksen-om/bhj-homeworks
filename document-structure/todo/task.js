@@ -1,31 +1,26 @@
 const taskInput = document.getElementById('task__input');
 const tasksList = document.getElementById('tasks__list');
-const tasksForm = document.getElementById('tasks__form');
+const tasksAdd = document.getElementById('tasks__add');
 
-tasksForm.addEventListener('click', function(e) {
+tasksAdd.addEventListener('click', function(e) {
     e.preventDefault();
-
     const userTask = taskInput.value.trim();
 
-    if (userTask.length === 0) {
-        return;
-    }
-    const task = `<div class='task'>
-                    <div class='task__title'>
+    if (userTask.length > 0) {
+        const task = document.createElement('div');
+        task.classList.add('task');
+
+    task.innerHTML = `<div class='task__title'>
                     ${userTask}
                     </div>
-                    <a href='#' class='task__remove'>&times;</a> 
-                    </div>`;
+                    <a href='#' class='task__remove'>&times;</a>`;
 
-tasksList.insertAdjacentHTML('beforeEnd', task);
-taskInput.value = '';
+tasksList.appendChild(task);
+const removeBtns = task.querySelector('.task__remove');
 
-const removeBtns = document.querySelectorAll('.task__remove');
-
-Array.from(removeBtns).forEach((elem) => {
-    elem.addEventListener('click', (e) => {
-        e.preventDefault();
+removeBtns.addEventListener('click', (e) => {
         e.target.closest('.task').remove();
-    })
-})
+    });
+    taskInput.value = '';
+}
 })
